@@ -3,13 +3,8 @@ import 'package:flutter/material.dart';
 class TextFieldWidget extends StatelessWidget {
   final TextEditingController controller;
   final String text;
-  String? Function(String?)? validator = (String? value) {
-    if (value == null || value.isEmpty) {
-      return 'This field cannot be empty';
-    }
-    return null;
-  };
-  TextFieldWidget({
+  final String? Function(String?)? validator;
+  const TextFieldWidget({
     super.key,
     required this.controller,
     required this.text,

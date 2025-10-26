@@ -9,4 +9,14 @@ class AuthRepositoryImpl extends AuthRepository {
   Future<Either> signUp(UserCreationModel user) async {
     return await sl<AuthFirebaseServices>().signUp(user);
   }
+
+  @override
+  Future<Either> signIn(UserCreationModel user) async {
+    return await sl<AuthFirebaseServices>().signIn(user);
+  }
+
+  @override
+  Future<Either> forgetPassword(String email) async {
+    return await sl<AuthFirebaseServices>().forgetPassword(email);
+  }
 }

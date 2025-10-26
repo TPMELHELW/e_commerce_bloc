@@ -6,13 +6,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class AuthFirebaseServices {
   Future<Either> signUp(UserCreationModel user);
+  Future<Either> signIn(UserCreationModel user);
+  Future<Either> forgetPassword(String email);
 }
 
 class AuthFirebaseServicesImpl implements AuthFirebaseServices {
+  final _auth = FirebaseAuth.instance;
+
   @override
   Future<Either> signUp(UserCreationModel user) async {
     try {
-      final data = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      final data = await _auth.createUserWithEmailAndPassword(
         email: user.email!.trim(),
         password: user.password!.trim(),
       );
@@ -24,6 +28,31 @@ class AuthFirebaseServicesImpl implements AuthFirebaseServices {
       return Right('Successfully Signed Up');
     } on FirebaseAuthException catch (e) {
       final message = AuthMappers.signUpMappers(e.code);
+      return Left(message);
+    }
+  }
+
+  @override
+  Future<Either> signIn(UserCreationModel user) async {
+    try {
+      await _auth.signInWithEmailAndPassword(
+        email: user.email!.trim(),
+        password: user.password!.trim(),
+      );
+      return Right(unit);
+    } on FirebaseAuthException catch (e) {
+      final message = AuthMappers.signUpMappers(e.code);
+      return Left(message);
+    }
+  }
+
+  @override
+  Future<Either> forgetPassword(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+      return Right(unit);
+    } on FirebaseAuthException catch (e) {
+      final message = AuthMappers.signInMappers(e.code);
       return Left(message);
     }
   }

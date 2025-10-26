@@ -5,10 +5,11 @@ import 'package:e_commerce_bloc/common/widgets/reactive_button_widget.dart';
 import 'package:e_commerce_bloc/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_bloc/data/auth/models/user_creation_model.dart';
 import 'package:e_commerce_bloc/domain/auth/usecases/signup_use_case.dart';
-import 'package:e_commerce_bloc/presentation/auth/bloc/age_selection_cubit.dart';
-import 'package:e_commerce_bloc/presentation/auth/bloc/gender_selection_cubit.dart';
-import 'package:e_commerce_bloc/presentation/auth/widgets/ages_widget.dart';
-import 'package:e_commerce_bloc/presentation/auth/widgets/gender_selection_widget.dart';
+import 'package:e_commerce_bloc/presentation/auth/sign_up/bloc/age_selection_cubit.dart';
+import 'package:e_commerce_bloc/presentation/auth/sign_up/bloc/gender_selection_cubit.dart';
+import 'package:e_commerce_bloc/presentation/auth/sign_up/widgets/ages_widget.dart';
+import 'package:e_commerce_bloc/presentation/auth/sign_up/widgets/gender_selection_widget.dart';
+import 'package:e_commerce_bloc/services_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -90,7 +91,7 @@ class GenderAgeSelectionPage extends StatelessWidget {
                         user.age = context.read<AgeSelectionCubit>().state;
 
                         context.read<ButtonCubit>().execute(
-                          usecase: SignupUseCase(),
+                          usecase: sl<SignupUseCase>(),
                           params: user,
                         );
                       },

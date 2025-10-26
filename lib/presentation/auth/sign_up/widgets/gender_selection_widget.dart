@@ -1,5 +1,5 @@
 import 'package:e_commerce_bloc/core/configs/theme/app_colors.dart';
-import 'package:e_commerce_bloc/presentation/auth/bloc/gender_selection_cubit.dart';
+import 'package:e_commerce_bloc/presentation/auth/sign_up/bloc/gender_selection_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

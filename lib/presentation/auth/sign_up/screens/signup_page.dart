@@ -4,8 +4,9 @@ import 'package:e_commerce_bloc/common/helper/app_navigator.dart';
 import 'package:e_commerce_bloc/common/widgets/basic_app_bar.dart';
 import 'package:e_commerce_bloc/common/widgets/basic_app_button.dart';
 import 'package:e_commerce_bloc/common/widgets/text_field_widget.dart';
+import 'package:e_commerce_bloc/core/validation/input_validation.dart';
 import 'package:e_commerce_bloc/data/auth/models/user_creation_model.dart';
-import 'package:e_commerce_bloc/presentation/auth/pages/gender_age_selection_page.dart';
+import 'package:e_commerce_bloc/presentation/auth/sign_up/screens/gender_age_selection_page.dart';
 import 'package:flutter/material.dart';
 
 class SignupPage extends StatelessWidget {
@@ -40,21 +41,26 @@ class SignupPage extends StatelessWidget {
                   TextFieldWidget(
                     controller: _firstNameController,
                     text: 'First Name',
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your first name';
-                      }
-                      return null;
-                    },
+                    validator: (value) =>
+                        AppFieldValidator.validateEmpty(value, 'First Name'),
                   ),
                   TextFieldWidget(
                     controller: _lastNameController,
                     text: 'Last Name',
+                    validator: (value) =>
+                        AppFieldValidator.validateEmpty(value, 'Last Name'),
                   ),
-                  TextFieldWidget(controller: _emailController, text: 'Email'),
+                  TextFieldWidget(
+                    controller: _emailController,
+                    text: 'Email',
+                    validator: (value) =>
+                        AppFieldValidator.validateEmail(value),
+                  ),
                   TextFieldWidget(
                     controller: _passwordController,
                     text: 'Password',
+                    validator: (value) =>
+                        AppFieldValidator.validatePassword(value),
                   ),
                 ],
               ),

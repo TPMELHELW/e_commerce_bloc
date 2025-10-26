@@ -1,5 +1,5 @@
 import 'package:e_commerce_bloc/core/configs/assets/app_vectors.dart';
-import 'package:e_commerce_bloc/presentation/auth/pages/signin_page.dart';
+import 'package:e_commerce_bloc/presentation/auth/sign_in/screens/signin_page.dart';
 import 'package:e_commerce_bloc/presentation/splash/bloc/splash_cubit.dart';
 import 'package:e_commerce_bloc/presentation/splash/bloc/splash_state.dart';
 import 'package:flutter/material.dart';

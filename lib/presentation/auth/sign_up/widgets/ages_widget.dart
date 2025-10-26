@@ -1,5 +1,5 @@
 import 'package:e_commerce_bloc/core/constants/ages_range.dart';
-import 'package:e_commerce_bloc/presentation/auth/bloc/age_selection_cubit.dart';
+import 'package:e_commerce_bloc/presentation/auth/sign_up/bloc/age_selection_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
