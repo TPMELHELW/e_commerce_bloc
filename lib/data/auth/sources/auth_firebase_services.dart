@@ -8,6 +8,7 @@ abstract class AuthFirebaseServices {
   Future<Either> signUp(UserCreationModel user);
   Future<Either> signIn(UserCreationModel user);
   Future<Either> forgetPassword(String email);
+  Future<bool> isSignIn();
 }
 
 class AuthFirebaseServicesImpl implements AuthFirebaseServices {
@@ -54,6 +55,15 @@ class AuthFirebaseServicesImpl implements AuthFirebaseServices {
     } on FirebaseAuthException catch (e) {
       final message = AuthMappers.signInMappers(e.code);
       return Left(message);
+    }
+  }
+
+  @override
+  Future<bool> isSignIn() async {
+    if (_auth.currentUser != null) {
+      return true;
+    } else {
+      return false;
     }
   }
 }
