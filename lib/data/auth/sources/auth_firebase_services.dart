@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:e_commerce_bloc/data/auth/mappers/auth_mappers.dart';
@@ -9,6 +11,7 @@ abstract class AuthFirebaseServices {
   Future<Either> signIn(UserCreationModel user);
   Future<Either> forgetPassword(String email);
   Future<bool> isSignIn();
+  Future<Either> getUserInfo();
 }
 
 class AuthFirebaseServicesImpl implements AuthFirebaseServices {
@@ -64,6 +67,22 @@ class AuthFirebaseServicesImpl implements AuthFirebaseServices {
       return true;
     } else {
       return false;
+    }
+  }
+
+  @override
+  Future<Either> getUserInfo() async {
+    try {
+      log('sss');
+      final data = await FirebaseFirestore.instance
+          .collection('Users')
+          .doc(_auth.currentUser?.uid)
+          .get()
+          .then((value) => value.data());
+      return Right(data);
+    } catch (e) {
+      print(e);
+      return Left('Failed to get user info');
     }
   }
 }

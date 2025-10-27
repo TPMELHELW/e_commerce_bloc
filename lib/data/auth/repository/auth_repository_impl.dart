@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:e_commerce_bloc/data/auth/models/user_creation_model.dart';
+import 'package:e_commerce_bloc/data/auth/models/user_model.dart';
 import 'package:e_commerce_bloc/data/auth/sources/auth_firebase_services.dart';
 import 'package:e_commerce_bloc/domain/auth/repository/auth_repository.dart';
 import 'package:e_commerce_bloc/services_locator.dart';
@@ -23,5 +24,19 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<bool> isSignIn() async {
     return await sl<AuthFirebaseServices>().isSignIn();
+  }
+
+  @override
+  Future<Either> getUserInfo() async {
+    final data = await sl<AuthFirebaseServices>().getUserInfo();
+
+    return data.fold(
+      (error) {
+        return Left(error);
+      },
+      (data) {
+        return Right(UserModel.fromMap(data).toEntity());
+      },
+    );
   }
 }
