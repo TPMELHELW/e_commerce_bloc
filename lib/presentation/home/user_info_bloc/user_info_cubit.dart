@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:e_commerce_bloc/domain/auth/usecases/get_user_info_use_case.dart';
-import 'package:e_commerce_bloc/presentation/home/bloc/user_info_state.dart';
+import 'package:e_commerce_bloc/presentation/home/user_info_bloc/user_info_state.dart';
 import 'package:e_commerce_bloc/services_locator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
