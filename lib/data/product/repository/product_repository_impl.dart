@@ -7,6 +7,8 @@ import 'package:e_commerce_bloc/domain/product/repository/product_repository.dar
 import 'package:e_commerce_bloc/services_locator.dart';
 
 class ProductRepositoryImpl extends ProductRepository {
+  // final _firebaseServices = sl<
+
   @override
   Future<Either<String, List<ProductEntity>>> getTopSeller() async {
     final data = await sl<FirebaseServices>().getData(
@@ -57,5 +59,31 @@ class ProductRepositoryImpl extends ProductRepository {
     // } catch (e) {
 
     // }
+  }
+
+  @override
+  Future<Either<String, List<ProductEntity>>> getCategoriesProducts(
+    String categoryId,
+  ) async {
+    final data = await sl<FirebaseServices>().getDataIsEqual(
+      'Products',
+      cond: categoryId,
+      field: 'categoryId',
+    );
+
+    return data.fold(
+      (error) {
+        return Left(error);
+      },
+      (data) {
+        final List<QueryDocumentSnapshot<Map<String, dynamic>>> finalData =
+            data;
+        return Right(
+          finalData
+              .map((e) => ProductModel.fromSnapshot(e).toEntity())
+              .toList(),
+        );
+      },
+    );
   }
 }

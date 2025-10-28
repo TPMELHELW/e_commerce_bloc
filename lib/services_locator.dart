@@ -12,6 +12,7 @@ import 'package:e_commerce_bloc/domain/auth/usecases/signup_use_case.dart';
 import 'package:e_commerce_bloc/domain/categories/repository/categories_repository.dart';
 import 'package:e_commerce_bloc/domain/categories/usecases/get_categories_use_case.dart';
 import 'package:e_commerce_bloc/domain/product/repository/product_repository.dart';
+import 'package:e_commerce_bloc/domain/product/usecase/get_category_product_use_case.dart';
 import 'package:e_commerce_bloc/domain/product/usecase/get_top_seller_use_case.dart';
 import 'package:e_commerce_bloc/domain/product/usecase/new_products_use_case.dart';
 import 'package:get_it/get_it.dart';
@@ -32,4 +33,5 @@ Future<void> initServicesLocator() async {
   sl.registerSingleton<GetCategoriesUseCase>(GetCategoriesUseCase());
   sl.registerSingleton<GetTopSellerUseCase>(GetTopSellerUseCase());
   sl.registerSingleton<NewProductsUseCase>(NewProductsUseCase());
+  sl.registerSingleton<GetCategoryProductUseCase>(GetCategoryProductUseCase());
 }

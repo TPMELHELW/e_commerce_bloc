@@ -1,7 +1,9 @@
 import 'package:e_commerce_bloc/common/bloc/categories_bloc/categories_cubit.dart';
 import 'package:e_commerce_bloc/common/bloc/categories_bloc/categories_state.dart';
+import 'package:e_commerce_bloc/common/helper/app_navigator.dart';
 import 'package:e_commerce_bloc/common/widgets/basic_app_bar.dart';
 import 'package:e_commerce_bloc/core/configs/theme/app_colors.dart';
+import 'package:e_commerce_bloc/presentation/products/pages/category_products_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -34,18 +36,26 @@ class CategoriesPage extends StatelessWidget {
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
-                        return Container(
-                          padding: EdgeInsets.all(12.0),
-                          decoration: BoxDecoration(
-                            color: AppColors.secondBackground,
-                            borderRadius: BorderRadius.circular(8.0),
+                        return GestureDetector(
+                          onTap: () => AppNavigator.push(
+                            context,
+                            CategoryProductsPage(
+                              categoriesEntity: state.categories[index],
+                            ),
                           ),
-                          child: Row(
-                            spacing: 10.0,
-                            children: [
-                              CircleAvatar(),
-                              Text(state.categories[index].title),
-                            ],
+                          child: Container(
+                            padding: EdgeInsets.all(12.0),
+                            decoration: BoxDecoration(
+                              color: AppColors.secondBackground,
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: Row(
+                              spacing: 10.0,
+                              children: [
+                                CircleAvatar(),
+                                Text(state.categories[index].title),
+                              ],
+                            ),
                           ),
                         );
                       },
