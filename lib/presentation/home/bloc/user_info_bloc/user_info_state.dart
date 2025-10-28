@@ -1,6 +1,6 @@
 import 'package:e_commerce_bloc/domain/auth/entity/user_entity.dart';
 
-class UserInfoState {}
+abstract class UserInfoState {}
 
 class UserInfoLoadingState extends UserInfoState {}
 

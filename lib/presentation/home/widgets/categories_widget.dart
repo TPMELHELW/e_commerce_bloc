@@ -1,5 +1,5 @@
-import 'package:e_commerce_bloc/presentation/home/categories_bloc/categories_cubit.dart';
-import 'package:e_commerce_bloc/presentation/home/categories_bloc/categories_state.dart';
+import 'package:e_commerce_bloc/presentation/home/bloc/categories_bloc/categories_cubit.dart';
+import 'package:e_commerce_bloc/presentation/home/bloc/categories_bloc/categories_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -42,7 +42,6 @@ class CategoriesWidget extends StatelessWidget {
                 SizedBox(
                   height: 100.0,
                   child: ListView.separated(
-                    // shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     padding: EdgeInsets.symmetric(horizontal: 16.0),
                     itemBuilder: (context, index) {

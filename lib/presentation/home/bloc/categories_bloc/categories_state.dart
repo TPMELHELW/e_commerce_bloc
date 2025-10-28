@@ -1,6 +1,6 @@
 import 'package:e_commerce_bloc/domain/categories/entity/categories_entity.dart';
 
-class CategoriesState {}
+abstract class CategoriesState {}
 
 class CategoriesLoadingState extends CategoriesState {}
 
