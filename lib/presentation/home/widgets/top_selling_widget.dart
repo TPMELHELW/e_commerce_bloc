@@ -1,6 +1,10 @@
 import 'package:e_commerce_bloc/core/configs/theme/app_colors.dart';
-import 'package:e_commerce_bloc/presentation/home/bloc/top_selling_bloc/top_selling_cubit.dart';
-import 'package:e_commerce_bloc/presentation/home/bloc/top_selling_bloc/top_selling_state.dart';
+import 'package:e_commerce_bloc/domain/product/usecase/get_top_seller_use_case.dart';
+import 'package:e_commerce_bloc/presentation/home/bloc/products_bloc/products_cubit.dart';
+import 'package:e_commerce_bloc/presentation/home/bloc/products_bloc/products_state.dart';
+// import 'package:e_commerce_bloc/presentation/home/bloc/top_selling_bloc/top_selling_cubit.dart';
+// import 'package:e_commerce_bloc/presentation/home/bloc/top_selling_bloc/top_selling_state.dart';
+import 'package:e_commerce_bloc/services_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,16 +13,17 @@ class TopSellingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<TopSellingCubit>(
+    return BlocProvider<ProductsCubit>(
       create: (BuildContext context) =>
-          TopSellingCubit()..getTopSellingProducts(),
-      child: BlocBuilder<TopSellingCubit, TopSellingState>(
+          ProductsCubit(useCase: sl<GetTopSellerUseCase>())
+            ..getNewProductData(),
+      child: BlocBuilder<ProductsCubit, ProductsState>(
         builder: (BuildContext context, state) {
-          if (state is TopSellingLoadingState) {
+          if (state is ProductsLoadingState) {
             return CircularProgressIndicator();
           }
 
-          if (state is TopSellingLoadedState) {
+          if (state is ProductsLoadedState) {
             return Column(
               children: [
                 Row(
@@ -56,7 +61,7 @@ class TopSellingWidget extends StatelessWidget {
                                   image: DecorationImage(
                                     fit: BoxFit.fill,
                                     image: AssetImage(
-                                      'assets/products/${state.topSellingProducts[index].title}.png',
+                                      'assets/products/${state.productsData[index].title}.png',
                                     ),
                                   ),
                                   borderRadius: const BorderRadius.only(
@@ -74,7 +79,7 @@ class TopSellingWidget extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      state.topSellingProducts[index].title,
+                                      state.productsData[index].title,
                                       style: const TextStyle(
                                         fontSize: 12,
                                         fontWeight: FontWeight.w300,
@@ -84,11 +89,11 @@ class TopSellingWidget extends StatelessWidget {
                                       children: [
                                         Text(
                                           state
-                                                      .topSellingProducts[index]
+                                                      .productsData[index]
                                                       .discountedPrice ==
                                                   0
-                                              ? "${state.topSellingProducts[index].price}\$"
-                                              : "${state.topSellingProducts[index].discountedPrice}\$",
+                                              ? "${state.productsData[index].price}\$"
+                                              : "${state.productsData[index].discountedPrice}\$",
                                           style: const TextStyle(
                                             fontSize: 12,
                                             fontWeight: FontWeight.w300,
@@ -97,11 +102,11 @@ class TopSellingWidget extends StatelessWidget {
                                         const SizedBox(width: 10),
                                         Text(
                                           state
-                                                      .topSellingProducts[index]
+                                                      .productsData[index]
                                                       .discountedPrice ==
                                                   0
                                               ? ''
-                                              : "${state.topSellingProducts[index].price}\$",
+                                              : "${state.productsData[index].price}\$",
                                           style: const TextStyle(
                                             fontSize: 12,
                                             color: Colors.grey,
@@ -122,7 +127,7 @@ class TopSellingWidget extends StatelessWidget {
                     },
                     separatorBuilder: (context, index) =>
                         const SizedBox(width: 10),
-                    itemCount: state.topSellingProducts.length,
+                    itemCount: state.productsData.length,
                   ),
                 ),
               ],

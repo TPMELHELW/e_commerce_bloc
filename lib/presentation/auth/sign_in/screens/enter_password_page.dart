@@ -1,5 +1,5 @@
-import 'package:e_commerce_bloc/common/button_bloc/button_cubit.dart';
-import 'package:e_commerce_bloc/common/button_bloc/button_state.dart';
+import 'package:e_commerce_bloc/common/bloc/button_bloc/button_cubit.dart';
+import 'package:e_commerce_bloc/common/bloc/button_bloc/button_state.dart';
 import 'package:e_commerce_bloc/common/helper/app_navigator.dart';
 import 'package:e_commerce_bloc/common/widgets/basic_app_bar.dart';
 import 'package:e_commerce_bloc/common/widgets/reactive_button_widget.dart';

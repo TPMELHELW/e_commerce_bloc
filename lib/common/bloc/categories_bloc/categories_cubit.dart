@@ -1,5 +1,5 @@
 import 'package:e_commerce_bloc/domain/categories/usecases/get_categories_use_case.dart';
-import 'package:e_commerce_bloc/presentation/home/bloc/categories_bloc/categories_state.dart';
+import 'package:e_commerce_bloc/common/bloc/categories_bloc/categories_state.dart';
 import 'package:e_commerce_bloc/services_locator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

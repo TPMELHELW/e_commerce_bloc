@@ -1,5 +1,7 @@
-import 'package:e_commerce_bloc/presentation/home/bloc/categories_bloc/categories_cubit.dart';
-import 'package:e_commerce_bloc/presentation/home/bloc/categories_bloc/categories_state.dart';
+import 'package:e_commerce_bloc/common/helper/app_navigator.dart';
+import 'package:e_commerce_bloc/presentation/categories/pages/categories_page.dart';
+import 'package:e_commerce_bloc/common/bloc/categories_bloc/categories_cubit.dart';
+import 'package:e_commerce_bloc/common/bloc/categories_bloc/categories_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -30,11 +32,22 @@ class CategoriesWidget extends StatelessWidget {
                         fontSize: 16,
                       ),
                     ),
-                    Text(
-                      'See All',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 16,
+                    TextButton(
+                      onPressed: () {
+                        AppNavigator.push(
+                          context,
+                          BlocProvider.value(
+                            value: context.read<CategoriesCubit>(),
+                            child: CategoriesPage(),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        'See All',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 16,
+                        ),
                       ),
                     ),
                   ],
