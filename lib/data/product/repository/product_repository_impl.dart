@@ -86,4 +86,31 @@ class ProductRepositoryImpl extends ProductRepository {
       },
     );
   }
+
+  @override
+  Future<Either<String, List<ProductEntity>>> searchProducts(
+    String query,
+  ) async {
+    final data = await sl<FirebaseServices>().getData(
+      'Products',
+      field: 'title',
+      cond: query,
+    );
+
+    return data.fold(
+      (error) {
+        return Left(error);
+      },
+      (data) {
+        final List<QueryDocumentSnapshot<Map<String, dynamic>>> finalData =
+            data;
+        // print(finalData.length);
+        return Right(
+          finalData
+              .map((e) => ProductModel.fromSnapshot(e).toEntity())
+              .toList(),
+        );
+      },
+    );
+  }
 }

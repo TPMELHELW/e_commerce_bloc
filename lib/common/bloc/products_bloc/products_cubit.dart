@@ -5,9 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductsCubit extends Cubit<ProductsState> {
   final Usecase useCase;
-  ProductsCubit({required this.useCase}) : super(ProductsLoadingState());
+  ProductsCubit({required this.useCase}) : super(ProductsInitialState());
 
   void getNewProductData({params}) async {
+    emit(ProductsLoadingState());
+
     final data = await useCase.call(params: params);
 
     data.fold(
@@ -18,5 +20,9 @@ class ProductsCubit extends Cubit<ProductsState> {
         emit(ProductsLoadedState(productsData: data));
       },
     );
+  }
+
+  void displayInitialState() {
+    emit(ProductsInitialState());
   }
 }

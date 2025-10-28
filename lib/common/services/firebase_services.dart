@@ -3,15 +3,15 @@ import 'package:dartz/dartz.dart';
 import 'package:e_commerce_bloc/data/categories/error_mappers/firebase_firestore_error_mappers.dart';
 
 abstract class FirebaseServices {
-  Future<Either> getData(String name, {String? field, dynamic? cond});
-  Future<Either> getDataIsEqual(String name, {String? field, dynamic? cond});
+  Future<Either> getData(String name, {String? field, dynamic cond});
+  Future<Either> getDataIsEqual(String name, {String? field, dynamic cond});
 }
 
 class FirebaseServicesImpl extends FirebaseServices {
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
 
   @override
-  Future<Either> getData(String name, {String? field, dynamic? cond}) async {
+  Future<Either> getData(String name, {String? field, dynamic cond}) async {
     try {
       final QuerySnapshot<Map<String, dynamic>> data = await _fireStore
           .collection(name)

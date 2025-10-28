@@ -2,6 +2,8 @@ import 'package:e_commerce_bloc/domain/product/entity/product_entity.dart';
 
 abstract class ProductsState {}
 
+class ProductsInitialState extends ProductsState {}
+
 class ProductsLoadingState extends ProductsState {}
 
 class ProductsLoadedState extends ProductsState {
