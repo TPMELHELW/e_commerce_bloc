@@ -1,16 +1,21 @@
+// import 'package:ecommerce/common/bloc/button/button_state_cubit.dart';
 import 'package:e_commerce_bloc/common/bloc/button_bloc/button_cubit.dart';
 import 'package:e_commerce_bloc/common/bloc/button_bloc/button_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+// import '../../bloc/button/button_state.dart';
+
 class ReactiveButtonWidget extends StatelessWidget {
   final VoidCallback onPressed;
   final String title;
   final double? height;
+  final Widget? content;
   const ReactiveButtonWidget({
     required this.onPressed,
-    required this.title,
+    this.title = '',
     this.height,
+    this.content,
     super.key,
   });
 
@@ -19,20 +24,42 @@ class ReactiveButtonWidget extends StatelessWidget {
     return BlocBuilder<ButtonCubit, ButtonState>(
       builder: (context, state) {
         if (state is ButtonStateLoading) {
-          return const Center(child: CircularProgressIndicator());
-        } else if (state is ButtonStateFailure) {
-          return Text('Error: ${state.message}');
-        } else {
-          return ElevatedButton(
-            onPressed: onPressed,
-            style: ElevatedButton.styleFrom(
-              minimumSize: Size(double.infinity, 50.0),
-              maximumSize: Size(double.infinity, height ?? 50),
-            ),
-            child: Text(title),
-          );
+          return _loading();
         }
+        return _initial();
       },
+    );
+  }
+
+  Widget _loading() {
+    return ElevatedButton(
+      onPressed: null,
+      style: ElevatedButton.styleFrom(
+        minimumSize: Size.fromHeight(height ?? 50),
+      ),
+      child: Container(
+        height: height ?? 50,
+        alignment: Alignment.center,
+        child: const CircularProgressIndicator(),
+      ),
+    );
+  }
+
+  Widget _initial() {
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        minimumSize: Size.fromHeight(height ?? 50),
+      ),
+      child:
+          content ??
+          Text(
+            title,
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
     );
   }
 }

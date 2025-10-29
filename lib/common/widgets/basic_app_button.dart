@@ -3,11 +3,15 @@ import 'package:flutter/material.dart';
 class BasicAppButton extends StatelessWidget {
   final VoidCallback onPressed;
   final String title;
+  final Widget? content;
   final double? height;
+  final double? width;
   const BasicAppButton({
     required this.onPressed,
-    required this.title,
+    this.title = '',
     this.height,
+    this.width,
+    this.content,
     super.key,
   });
 
@@ -16,15 +20,20 @@ class BasicAppButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        minimumSize: Size.fromHeight(height ?? 50),
-      ),
-      child: Text(
-        title,
-        style: const TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.w400,
+        minimumSize: Size(
+          width ?? MediaQuery.of(context).size.width,
+          height ?? 50,
         ),
       ),
+      child:
+          content ??
+          Text(
+            title,
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
     );
   }
 }

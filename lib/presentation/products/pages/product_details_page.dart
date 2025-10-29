@@ -1,3 +1,4 @@
+import 'package:e_commerce_bloc/common/bloc/button_bloc/button_cubit.dart';
 import 'package:e_commerce_bloc/common/bloc/products_bloc/products_details_bloc/product_quantity_cubit.dart';
 import 'package:e_commerce_bloc/common/bloc/products_bloc/products_details_bloc/select_color_cubit.dart';
 import 'package:e_commerce_bloc/common/bloc/products_bloc/products_details_bloc/select_size_cubit.dart';
@@ -6,7 +7,9 @@ import 'package:e_commerce_bloc/core/configs/theme/app_colors.dart';
 // import 'package:e_commerce_bloc/core/constants/product_colors.dart';
 // import 'package:e_commerce_bloc/core/constants/product_sizes.dart';
 import 'package:e_commerce_bloc/domain/product/entity/product_entity.dart';
+import 'package:e_commerce_bloc/presentation/products/widgets/add_to_bag_widget.dart';
 import 'package:e_commerce_bloc/presentation/products/widgets/product_color_widget.dart';
+import 'package:e_commerce_bloc/presentation/products/widgets/product_images_widget.dart';
 import 'package:e_commerce_bloc/presentation/products/widgets/product_quantity_widget.dart';
 import 'package:e_commerce_bloc/presentation/products/widgets/product_size_widget.dart';
 // import 'package:e_commerce_bloc/presentation/products/widgets/selection_widget.dart';
@@ -20,43 +23,31 @@ class ProductDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: BasicAppbar(),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 16.0),
-        child: MultiBlocProvider(
-          providers: [
-            BlocProvider(create: (BuildContext context) => SelectSizeCubit()),
-            BlocProvider(create: (BuildContext context) => SelectColorCubit()),
-            BlocProvider(
-              create: (BuildContext context) => ProductQuantityCubit(),
-            ),
-          ],
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<SelectSizeCubit>(
+          create: (BuildContext context) => SelectSizeCubit(),
+        ),
+        BlocProvider<SelectColorCubit>(
+          create: (BuildContext context) => SelectColorCubit(),
+        ),
+        BlocProvider<ProductQuantityCubit>(
+          create: (BuildContext context) => ProductQuantityCubit(),
+        ),
+        BlocProvider<ButtonCubit>(
+          create: (BuildContext context) => ButtonCubit(),
+        ),
+      ],
+      child: Scaffold(
+        bottomNavigationBar: AddToBagWidget(productEntity: productEntity),
+        appBar: BasicAppbar(),
+        body: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             spacing: 10.0,
             children: [
-              SizedBox(
-                height: 300,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      width: 200,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          fit: BoxFit.fill,
-                          image: AssetImage(
-                            'assets/products/${productEntity.images[index]}',
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                  separatorBuilder: (context, index) => SizedBox(width: 20.0),
-                  itemCount: 2,
-                ),
-              ),
+              ProductImagesWidget(productEntity: productEntity),
               Text(
                 productEntity.title,
                 style: const TextStyle(
@@ -74,11 +65,6 @@ class ProductDetailsPage extends StatelessWidget {
               ),
               ProductSizeWidget(),
               ProductColorWidget(),
-              // SelectionWidget(
-              //   text: 'Color',
-              // widget:
-              //   dataSelection: productColors,
-              // ),
               ProductQuantity(productEntity: productEntity),
             ],
           ),
