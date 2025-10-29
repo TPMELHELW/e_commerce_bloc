@@ -7,7 +7,7 @@ class ProductModel {
   // final Timestamp createdDate;
   final int discountedPrice;
   final String gender;
-  // final List<String> images;
+  final List<String> images;
   final int price;
   // final List<String> sizes;
   final String productId;
@@ -19,7 +19,7 @@ class ProductModel {
     // required this.createdDate,
     required this.discountedPrice,
     required this.gender,
-    // required this.images,
+    required this.images,
     required this.price,
     // required this.sizes,
     required this.productId,
@@ -36,7 +36,7 @@ class ProductModel {
       // createdDate: map['createdDate'] as Timestamp,
       discountedPrice: map['discountedPrice'],
       gender: map['gender'] as String,
-      // images: List<String>.from(map['images'].map((e) => e.toString())),
+      images: List<String>.from(map['images'].map((e) => e.toString())),
       price: map['price'],
       // sizes: List<String>.from(map['sizes'].map((e) => e.toString())),
       productId: data.id,
@@ -53,7 +53,7 @@ extension ProductXModel on ProductModel {
       // createdDate: createdDate,
       discountedPrice: discountedPrice,
       gender: gender,
-      // images: images,
+      images: images,
       price: price,
       // sizes: sizes,
       productId: productId,

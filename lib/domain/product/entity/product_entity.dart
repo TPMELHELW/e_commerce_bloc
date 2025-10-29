@@ -8,7 +8,7 @@ class ProductEntity {
   // final Timestamp createdDate;
   final int discountedPrice;
   final String gender;
-  // final List<String> images;
+  final List<String> images;
   final int price;
   // final List<String> sizes;
   final String productId;
@@ -21,7 +21,7 @@ class ProductEntity {
     // required this.createdDate,
     required this.discountedPrice,
     required this.gender,
-    // required this.images,
+    required this.images,
     required this.price,
     // required this.sizes,
     required this.productId,

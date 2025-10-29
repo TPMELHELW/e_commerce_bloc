@@ -104,7 +104,6 @@ class ProductRepositoryImpl extends ProductRepository {
       (data) {
         final List<QueryDocumentSnapshot<Map<String, dynamic>>> finalData =
             data;
-        // print(finalData.length);
         return Right(
           finalData
               .map((e) => ProductModel.fromSnapshot(e).toEntity())
