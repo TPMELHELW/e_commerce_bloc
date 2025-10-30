@@ -1,6 +1,8 @@
 import 'package:e_commerce_bloc/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_bloc/domain/order/entity/product_cart_entity.dart';
+import 'package:e_commerce_bloc/presentation/cart/bloc/cart_products_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductCartWidget extends StatelessWidget {
   final ProductCartEntity productOrderedEntity;
@@ -122,9 +124,9 @@ class ProductCartWidget extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    // context.read<CartProductsDisplayCubit>().removeProduct(
-                    //   productOrderedEntity,
-                    // );
+                    context.read<CartProductsCubit>().removeProduct(
+                      productOrderedEntity.id,
+                    );
                   },
                   child: Container(
                     height: 23,

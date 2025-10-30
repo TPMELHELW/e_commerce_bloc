@@ -1,4 +1,5 @@
 class ProductCartEntity {
+  final String id;
   final String productId;
   final String productTitle;
   final int productQuantity;
@@ -9,6 +10,7 @@ class ProductCartEntity {
   final String productColor;
 
   ProductCartEntity({
+    required this.id,
     required this.productSize,
     required this.productColor,
     required this.productId,

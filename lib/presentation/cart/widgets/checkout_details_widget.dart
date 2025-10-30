@@ -2,14 +2,7 @@ import 'package:e_commerce_bloc/common/helper/cart_helper.dart';
 import 'package:e_commerce_bloc/common/widgets/basic_app_button.dart';
 import 'package:e_commerce_bloc/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_bloc/domain/order/entity/product_cart_entity.dart';
-// import 'package:ecommerce/common/helper/cart/cart.dart';
-// import 'package:ecommerce/common/helper/navigator/app_navigator.dart';
-// import 'package:ecommerce/common/widgets/button/basic_app_button.dart';
-// import 'package:ecommerce/core/configs/theme/app_colors.dart';
-// import 'package:ecommerce/presentation/cart/pages/checkout.dart';
 import 'package:flutter/material.dart';
-
-// import '../../../domain/order/entities/product_ordered.dart';
 
 class CheckoutDetailsWidget extends StatelessWidget {
   final List<ProductCartEntity> products;

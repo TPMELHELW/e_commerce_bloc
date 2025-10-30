@@ -28,7 +28,6 @@ class CartPage extends StatelessWidget {
                   Expanded(
                     child: ListView.separated(
                       itemBuilder: (context, index) {
-                        // print(state.cartProducts[index].productImage);
                         return ProductCartWidget(
                           productOrderedEntity: state.cartProducts[index],
                         );

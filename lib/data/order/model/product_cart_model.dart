@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce_bloc/domain/order/entity/product_cart_entity.dart';
 
 class ProductCartModel {
+  final String? id;
   final String productId;
   final String productTitle;
   final int productQuantity;
@@ -12,6 +13,7 @@ class ProductCartModel {
   final String productColor;
 
   ProductCartModel({
+    this.id,
     required this.productSize,
     required this.productColor,
     required this.productId,
@@ -49,6 +51,7 @@ class ProductCartModel {
       productImage: map['productImage'],
       productSize: map['productSize'],
       productColor: map['productColor'],
+      id: data.id,
     );
   }
 
@@ -66,6 +69,7 @@ extension ProductCartXModel on ProductCartModel {
       productImage: productImage,
       productSize: productSize,
       productColor: productColor,
+      id: id!,
     );
   }
 }

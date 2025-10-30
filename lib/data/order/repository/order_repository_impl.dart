@@ -32,4 +32,9 @@ class OrderRepositoryImpl extends OrderRepository {
       },
     );
   }
+
+  @override
+  Future<Either> removeFromCart(String productId) async {
+    return await sl<OrderFirestoreServices>().removeFromCart(productId);
+  }
 }

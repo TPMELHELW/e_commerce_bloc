@@ -6,4 +6,5 @@ import 'package:e_commerce_bloc/domain/order/entity/product_cart_entity.dart';
 abstract class OrderRepository {
   Future<Either> addtoCart(ProductCartModel product);
   Future<Either<String, List<ProductCartEntity>>> getCartProducts();
+  Future<Either> removeFromCart(String productId);
 }

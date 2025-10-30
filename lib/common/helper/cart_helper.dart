@@ -1,5 +1,3 @@
-// import '../../../domain/order/entities/product_ordered.dart';
-
 import 'package:e_commerce_bloc/domain/order/entity/product_cart_entity.dart';
 
 class CartHelper {

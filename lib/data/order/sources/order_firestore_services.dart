@@ -7,6 +7,7 @@ abstract class OrderFirestoreServices {
   Future<Either> addToCart(ProductCartModel product);
   Future<Either<String, List<QueryDocumentSnapshot<Map<String, dynamic>>>>>
   getCartProduct();
+  Future<Either> removeFromCart(String productId);
 }
 
 class OrderFirestoreServicesImpl extends OrderFirestoreServices {
@@ -37,6 +38,21 @@ class OrderFirestoreServicesImpl extends OrderFirestoreServices {
       return Right(data.docs);
     } catch (e) {
       return Left('Error');
+    }
+  }
+
+  @override
+  Future<Either> removeFromCart(String productId) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('Users')
+          .doc(currentUser!.uid)
+          .collection('Cart')
+          .doc(productId)
+          .delete();
+      return Right('Success');
+    } catch (e) {
+      return Left('error');
     }
   }
 }
