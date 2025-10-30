@@ -1,8 +1,11 @@
+import 'package:e_commerce_bloc/common/helper/app_navigator.dart';
 import 'package:e_commerce_bloc/core/configs/theme/app_colors.dart';
+import 'package:e_commerce_bloc/presentation/cart/pages/cart_page.dart';
 import 'package:e_commerce_bloc/presentation/home/bloc/user_info_bloc/user_info_cubit.dart';
 import 'package:e_commerce_bloc/presentation/home/bloc/user_info_bloc/user_info_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:iconsax/iconsax.dart';
 
 class HeaderWidget extends StatelessWidget {
   const HeaderWidget({super.key});
@@ -35,13 +38,18 @@ class HeaderWidget extends StatelessWidget {
                     ],
                   ),
                 ),
-                Container(
-                  padding: EdgeInsets.all(10.0),
-                  decoration: BoxDecoration(
-                    color: AppColors.primary,
-                    borderRadius: BorderRadius.circular(30.0),
+                GestureDetector(
+                  onTap: () {
+                    AppNavigator.push(context, CartPage());
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(
+                      color: AppColors.primary,
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
+                    child: Icon(Iconsax.bag),
                   ),
-                  child: Icon(Icons.shopping_bag),
                 ),
               ],
             );

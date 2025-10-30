@@ -5,20 +5,36 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class OrderFirestoreServices {
   Future<Either> addToCart(ProductCartModel product);
+  Future<Either<String, List<QueryDocumentSnapshot<Map<String, dynamic>>>>>
+  getCartProduct();
 }
 
 class OrderFirestoreServicesImpl extends OrderFirestoreServices {
+  final currentUser = FirebaseAuth.instance.currentUser;
   @override
   Future<Either> addToCart(ProductCartModel product) async {
     try {
-      final currentUser = FirebaseAuth.instance.currentUser;
-
       await FirebaseFirestore.instance
           .collection('Users')
           .doc(currentUser!.uid)
           .collection('Cart')
           .add(product.toMap());
       return Right('Success');
+    } catch (e) {
+      return Left('Error');
+    }
+  }
+
+  @override
+  Future<Either<String, List<QueryDocumentSnapshot<Map<String, dynamic>>>>>
+  getCartProduct() async {
+    try {
+      final data = await FirebaseFirestore.instance
+          .collection('Users')
+          .doc(currentUser!.uid)
+          .collection('Cart')
+          .get();
+      return Right(data.docs);
     } catch (e) {
       return Left('Error');
     }
