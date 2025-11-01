@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
+    return BlocProvider<SplashCubit>(
       create: (BuildContext context) => SplashCubit()..appStarted(),
       child: MaterialApp(theme: AppTheme.appTheme, home: SplashPage()),
     );

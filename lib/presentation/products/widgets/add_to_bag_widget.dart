@@ -5,7 +5,6 @@ import 'package:e_commerce_bloc/common/bloc/products_bloc/products_details_bloc/
 import 'package:e_commerce_bloc/common/helper/product_price_helper.dart';
 import 'package:e_commerce_bloc/common/widgets/reactive_button_widget.dart';
 import 'package:e_commerce_bloc/core/constants/product_colors.dart';
-import 'package:e_commerce_bloc/core/constants/product_sizes.dart';
 import 'package:e_commerce_bloc/data/order/model/product_cart_model.dart';
 import 'package:e_commerce_bloc/domain/order/usecases/add_to_cart_use_case.dart';
 import 'package:e_commerce_bloc/domain/product/entity/product_entity.dart';
