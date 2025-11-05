@@ -11,3 +11,5 @@ class CartProductsLoadedState extends CartProductsState {
 }
 
 class CartProductsFailureState extends CartProductsState {}
+
+class CartProductsSuccessState extends CartProductsState {}

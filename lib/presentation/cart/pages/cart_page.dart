@@ -1,3 +1,4 @@
+import 'package:e_commerce_bloc/common/bloc/button_bloc/button_cubit.dart';
 import 'package:e_commerce_bloc/common/widgets/basic_app_bar.dart';
 import 'package:e_commerce_bloc/presentation/cart/bloc/cart_products_cubit.dart';
 import 'package:e_commerce_bloc/presentation/cart/bloc/cart_products_state.dart';
@@ -13,9 +14,15 @@ class CartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BasicAppbar(title: Text('Cart')),
-      body: BlocProvider<CartProductsCubit>(
-        create: (BuildContext context) =>
-            CartProductsCubit()..getCartProducts(),
+      body: MultiBlocProvider(
+        // create:
+        providers: [
+          BlocProvider(
+            create: (BuildContext context) =>
+                CartProductsCubit()..getCartProducts(),
+          ),
+          BlocProvider(create: (BuildContext context) => ButtonCubit()),
+        ],
         child: BlocBuilder<CartProductsCubit, CartProductsState>(
           builder: (BuildContext context, state) {
             if (state is CartProductsLoadingState) {

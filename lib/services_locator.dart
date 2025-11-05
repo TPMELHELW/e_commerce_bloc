@@ -14,6 +14,7 @@ import 'package:e_commerce_bloc/domain/auth/usecases/signup_use_case.dart';
 import 'package:e_commerce_bloc/domain/categories/repository/categories_repository.dart';
 import 'package:e_commerce_bloc/domain/categories/usecases/get_categories_use_case.dart';
 import 'package:e_commerce_bloc/domain/order/repository/order_repository.dart';
+import 'package:e_commerce_bloc/domain/order/usecases/add_order_use_case.dart';
 import 'package:e_commerce_bloc/domain/order/usecases/add_to_cart_use_case.dart';
 import 'package:e_commerce_bloc/domain/order/usecases/get_cart_products_use_case.dart';
 import 'package:e_commerce_bloc/domain/order/usecases/remove_product_use_case.dart';
@@ -57,4 +58,5 @@ Future<void> initServicesLocator() async {
   sl.registerSingleton<GetFavouriteProductUseCase>(
     GetFavouriteProductUseCase(),
   );
+  sl.registerSingleton<AddOrderUseCase>(AddOrderUseCase());
 }

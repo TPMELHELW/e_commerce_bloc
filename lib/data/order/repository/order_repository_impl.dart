@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
+import 'package:e_commerce_bloc/data/order/model/order_model.dart';
 import 'package:e_commerce_bloc/data/order/model/product_cart_model.dart';
 import 'package:e_commerce_bloc/data/order/sources/order_firestore_services.dart';
 import 'package:e_commerce_bloc/domain/order/entity/product_cart_entity.dart';
@@ -9,7 +10,7 @@ import 'package:e_commerce_bloc/services_locator.dart';
 
 class OrderRepositoryImpl extends OrderRepository {
   @override
-  Future<Either> addtoCart(ProductCartModel product) async {
+  Future<Either<String, String>> addtoCart(ProductCartModel product) async {
     return await sl<OrderFirestoreServices>().addToCart(product);
   }
 
@@ -34,7 +35,12 @@ class OrderRepositoryImpl extends OrderRepository {
   }
 
   @override
-  Future<Either> removeFromCart(String productId) async {
+  Future<Either<String, String>> removeFromCart(String productId) async {
     return await sl<OrderFirestoreServices>().removeFromCart(productId);
+  }
+
+  @override
+  Future<Either<String, String>> addOrder(OrderModel product) async {
+    return await sl<OrderFirestoreServices>().addOrder(product);
   }
 }

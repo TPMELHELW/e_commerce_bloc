@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:e_commerce_bloc/data/product/model/product_model.dart';
 import 'package:e_commerce_bloc/domain/order/entity/product_cart_entity.dart';
+import 'package:e_commerce_bloc/domain/product/entity/product_entity.dart';
 
 class ProductCartModel {
   final String? id;
@@ -70,6 +72,21 @@ extension ProductCartXModel on ProductCartModel {
       productSize: productSize,
       productColor: productColor,
       id: id!,
+    );
+  }
+}
+
+extension ProductCartXEntity on ProductCartEntity {
+  ProductCartModel toModel() {
+    return ProductCartModel(
+      productSize: productSize,
+      productColor: productColor,
+      productId: productId,
+      productTitle: productTitle,
+      productQuantity: productQuantity,
+      productPrice: productPrice,
+      totalPrice: totalPrice,
+      productImage: productImage,
     );
   }
 }

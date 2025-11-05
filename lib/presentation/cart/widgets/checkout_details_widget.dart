@@ -1,8 +1,16 @@
+import 'package:e_commerce_bloc/common/bloc/button_bloc/button_cubit.dart';
+import 'package:e_commerce_bloc/common/bloc/button_bloc/button_state.dart';
+import 'package:e_commerce_bloc/common/helper/app_navigator.dart';
 import 'package:e_commerce_bloc/common/helper/cart_helper.dart';
-import 'package:e_commerce_bloc/common/widgets/basic_app_button.dart';
+import 'package:e_commerce_bloc/common/widgets/reactive_button_widget.dart';
 import 'package:e_commerce_bloc/core/configs/theme/app_colors.dart';
+import 'package:e_commerce_bloc/data/order/model/order_model.dart';
 import 'package:e_commerce_bloc/domain/order/entity/product_cart_entity.dart';
+import 'package:e_commerce_bloc/domain/order/usecases/add_order_use_case.dart';
+import 'package:e_commerce_bloc/presentation/cart/pages/success_page.dart';
+import 'package:e_commerce_bloc/services_locator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CheckoutDetailsWidget extends StatelessWidget {
   final List<ProductCartEntity> products;
@@ -72,11 +80,27 @@ class CheckoutDetailsWidget extends StatelessWidget {
               ),
             ],
           ),
-          BasicAppButton(
-            onPressed: () {
-              // AppNavigator.push(context, CheckOutPage(products: products));
+          BlocListener<ButtonCubit, ButtonState>(
+            listener: (BuildContext context, ButtonState state) {
+              if (state is ButtonStateSuccess) {
+                AppNavigator.push(context, SuccessPage());
+              }
             },
-            title: 'Checkout',
+            child: ReactiveButtonWidget(
+              onPressed: () {
+                context.read<ButtonCubit>().execute(
+                  usecase: sl<AddOrderUseCase>(),
+                  params: OrderModel(
+                    products: products,
+                    createdDate: DateTime.now().toString(),
+                    itemCount: products.length,
+                    totalPrice: CartHelper.calculateCartSubtotal(products),
+                    shippingAddress: 'Address',
+                  ),
+                );
+              },
+              title: 'Checkout',
+            ),
           ),
         ],
       ),

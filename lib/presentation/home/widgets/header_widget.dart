@@ -3,6 +3,7 @@ import 'package:e_commerce_bloc/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_bloc/presentation/cart/pages/cart_page.dart';
 import 'package:e_commerce_bloc/presentation/home/bloc/user_info_bloc/user_info_cubit.dart';
 import 'package:e_commerce_bloc/presentation/home/bloc/user_info_bloc/user_info_state.dart';
+import 'package:e_commerce_bloc/presentation/settings/pages/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
@@ -24,19 +25,20 @@ class HeaderWidget extends StatelessWidget {
             return Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CircleAvatar(radius: 30.0),
+                GestureDetector(
+                  onTap: () => AppNavigator.push(context, SettingsPage()),
+                  child: CircleAvatar(
+                    radius: 20.0,
+                    backgroundImage: AssetImage('assets/images/profile.png'),
+                  ),
+                ),
                 Container(
-                  padding: EdgeInsets.all(15.0),
+                  padding: EdgeInsets.all(10.0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30.0),
                     color: AppColors.secondBackground,
                   ),
-                  child: Row(
-                    children: [
-                      Text(state.userData.gender),
-                      Icon(Icons.arrow_drop_down),
-                    ],
-                  ),
+                  child: Text(state.userData.gender),
                 ),
                 GestureDetector(
                   onTap: () {
