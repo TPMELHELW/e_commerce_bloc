@@ -9,7 +9,6 @@ class SearchFieldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       onChanged: (value) {
-        print(value);
         if (value.isEmpty) {
           context.read<ProductsCubit>().displayInitialState();
         } else {

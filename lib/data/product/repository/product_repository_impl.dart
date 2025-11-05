@@ -7,8 +7,6 @@ import 'package:e_commerce_bloc/domain/product/repository/product_repository.dar
 import 'package:e_commerce_bloc/services_locator.dart';
 
 class ProductRepositoryImpl extends ProductRepository {
-  // final _firebaseServices = sl<
-
   @override
   Future<Either<String, List<ProductEntity>>> getTopSeller() async {
     final data = await sl<FirebaseServices>().getData(
@@ -35,7 +33,6 @@ class ProductRepositoryImpl extends ProductRepository {
 
   @override
   Future<Either<String, List<ProductEntity>>> getNewProducts() async {
-    // try {
     final data = await sl<FirebaseServices>().getData(
       'Products',
       field: 'createdDate',
@@ -56,9 +53,6 @@ class ProductRepositoryImpl extends ProductRepository {
         );
       },
     );
-    // } catch (e) {
-
-    // }
   }
 
   @override
@@ -91,7 +85,7 @@ class ProductRepositoryImpl extends ProductRepository {
   Future<Either<String, List<ProductEntity>>> searchProducts(
     String query,
   ) async {
-    final data = await sl<FirebaseServices>().getData(
+    final data = await sl<FirebaseServices>().getDataIsEqual(
       'Products',
       field: 'title',
       cond: query,
@@ -111,5 +105,46 @@ class ProductRepositoryImpl extends ProductRepository {
         );
       },
     );
+  }
+
+  @override
+  Future<Either> addOrRemoveFavouriteProduct(ProductEntity product) async {
+    final data = await sl<FirebaseServices>().addOrRemoveFavouriteProduct(
+      product,
+    );
+
+    return data.fold(
+      (error) {
+        return Left(error);
+      },
+      (data) {
+        return Right(data);
+      },
+    );
+  }
+
+  @override
+  Future<Either<String, List<ProductEntity>>> getFavouriteProducts() async {
+    final data = await sl<FirebaseServices>().getFavouriteProducts();
+
+    return data.fold(
+      (error) {
+        return Left(error);
+      },
+      (data) {
+        final List<QueryDocumentSnapshot<Map<String, dynamic>>> finalData =
+            data;
+        return Right(
+          finalData
+              .map((e) => ProductModel.fromSnapshot(e).toEntity())
+              .toList(),
+        );
+      },
+    );
+  }
+
+  @override
+  Future<bool> isFavourite(String productId) async {
+    return await sl<FirebaseServices>().isFavourite(productId);
   }
 }

@@ -52,7 +52,11 @@ class CategoriesPage extends StatelessWidget {
                             child: Row(
                               spacing: 10.0,
                               children: [
-                                CircleAvatar(),
+                                CircleAvatar(
+                                  backgroundImage: AssetImage(
+                                    'assets/categories/${state.categories[index].imageUrl}',
+                                  ),
+                                ),
                                 Text(state.categories[index].title),
                               ],
                             ),
@@ -66,7 +70,6 @@ class CategoriesPage extends StatelessWidget {
                   }
                   return Container();
                 },
-                // child:
               ),
             ],
           ),

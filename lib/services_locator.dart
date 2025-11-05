@@ -18,8 +18,11 @@ import 'package:e_commerce_bloc/domain/order/usecases/add_to_cart_use_case.dart'
 import 'package:e_commerce_bloc/domain/order/usecases/get_cart_products_use_case.dart';
 import 'package:e_commerce_bloc/domain/order/usecases/remove_product_use_case.dart';
 import 'package:e_commerce_bloc/domain/product/repository/product_repository.dart';
+import 'package:e_commerce_bloc/domain/product/usecase/add_or_remove_favourite_product_use_case.dart';
 import 'package:e_commerce_bloc/domain/product/usecase/get_category_product_use_case.dart';
+import 'package:e_commerce_bloc/domain/product/usecase/get_favourite_product_use_case.dart';
 import 'package:e_commerce_bloc/domain/product/usecase/get_top_seller_use_case.dart';
+import 'package:e_commerce_bloc/domain/product/usecase/is_favourite_use_case.dart';
 import 'package:e_commerce_bloc/domain/product/usecase/new_products_use_case.dart';
 import 'package:e_commerce_bloc/domain/product/usecase/product_search_use_case.dart';
 import 'package:get_it/get_it.dart';
@@ -47,4 +50,11 @@ Future<void> initServicesLocator() async {
   sl.registerSingleton<AddToCartUseCase>(AddToCartUseCase());
   sl.registerSingleton<GetCartProductsUseCase>(GetCartProductsUseCase());
   sl.registerSingleton<RemoveProductUseCase>(RemoveProductUseCase());
+  sl.registerSingleton<IsFavouriteUseCase>(IsFavouriteUseCase());
+  sl.registerSingleton<AddOrRemoveFavoriteProductUseCase>(
+    AddOrRemoveFavoriteProductUseCase(),
+  );
+  sl.registerSingleton<GetFavouriteProductUseCase>(
+    GetFavouriteProductUseCase(),
+  );
 }

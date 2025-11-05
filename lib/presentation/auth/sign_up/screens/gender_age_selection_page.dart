@@ -1,10 +1,13 @@
 import 'package:e_commerce_bloc/common/bloc/button_bloc/button_cubit.dart';
+import 'package:e_commerce_bloc/common/bloc/button_bloc/button_state.dart';
 import 'package:e_commerce_bloc/common/helper/app_bottom_sheet.dart';
+import 'package:e_commerce_bloc/common/helper/app_navigator.dart';
 import 'package:e_commerce_bloc/common/widgets/basic_app_bar.dart';
 import 'package:e_commerce_bloc/common/widgets/reactive_button_widget.dart';
 import 'package:e_commerce_bloc/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_bloc/data/auth/models/user_creation_model.dart';
 import 'package:e_commerce_bloc/domain/auth/usecases/signup_use_case.dart';
+import 'package:e_commerce_bloc/presentation/auth/sign_in/screens/signin_page.dart';
 import 'package:e_commerce_bloc/presentation/auth/sign_up/bloc/age_selection_cubit.dart';
 import 'package:e_commerce_bloc/presentation/auth/sign_up/bloc/gender_selection_cubit.dart';
 import 'package:e_commerce_bloc/presentation/auth/sign_up/widgets/ages_widget.dart';
@@ -74,28 +77,41 @@ class GenderAgeSelectionPage extends StatelessWidget {
                 ),
 
                 Spacer(),
-                Container(
-                  height: 100,
-                  color: AppColors.secondBackground,
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Center(
-                    child: ReactiveButtonWidget(
-                      onPressed: () {
-                        user.gender =
-                            context
-                                    .read<GenderSelectionCubit>()
-                                    .selectedGender ==
-                                0
-                            ? 'Male'
-                            : 'Female';
-                        user.age = context.read<AgeSelectionCubit>().state;
+                BlocListener<ButtonCubit, ButtonState>(
+                  listener: (BuildContext context, state) {
+                    if (state is ButtonStateSuccess) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Successfully signed up!'),
+                          behavior: SnackBarBehavior.floating,
+                        ),
+                      );
+                      AppNavigator.push(context, SigninPage());
+                    }
+                  },
+                  child: Container(
+                    height: 100,
+                    color: AppColors.secondBackground,
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Center(
+                      child: ReactiveButtonWidget(
+                        onPressed: () {
+                          user.gender =
+                              context
+                                      .read<GenderSelectionCubit>()
+                                      .selectedGender ==
+                                  0
+                              ? 'Male'
+                              : 'Female';
+                          user.age = context.read<AgeSelectionCubit>().state;
 
-                        context.read<ButtonCubit>().execute(
-                          usecase: sl<SignupUseCase>(),
-                          params: user,
-                        );
-                      },
-                      title: 'Finish',
+                          context.read<ButtonCubit>().execute(
+                            usecase: sl<SignupUseCase>(),
+                            params: user,
+                          );
+                        },
+                        title: 'Finish',
+                      ),
                     ),
                   ),
                 ),

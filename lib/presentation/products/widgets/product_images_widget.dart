@@ -25,7 +25,7 @@ class ProductImagesWidget extends StatelessWidget {
           );
         },
         separatorBuilder: (context, index) => SizedBox(width: 20.0),
-        itemCount: 2,
+        itemCount: productEntity.images.length,
       ),
     );
   }

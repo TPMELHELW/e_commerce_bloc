@@ -8,4 +8,7 @@ abstract class ProductRepository {
     String categoryId,
   );
   Future<Either<String, List<ProductEntity>>> searchProducts(String query);
+  Future<Either> addOrRemoveFavouriteProduct(ProductEntity product);
+  Future<Either<String, List<ProductEntity>>> getFavouriteProducts();
+  Future<bool> isFavourite(String productId);
 }

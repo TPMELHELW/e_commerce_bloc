@@ -1,4 +1,5 @@
 import 'package:e_commerce_bloc/common/bloc/button_bloc/button_cubit.dart';
+import 'package:e_commerce_bloc/common/bloc/products_bloc/products_details_bloc/favourite_icon_cubit.dart';
 import 'package:e_commerce_bloc/common/bloc/products_bloc/products_details_bloc/product_quantity_cubit.dart';
 import 'package:e_commerce_bloc/common/bloc/products_bloc/products_details_bloc/select_color_cubit.dart';
 import 'package:e_commerce_bloc/common/bloc/products_bloc/products_details_bloc/select_size_cubit.dart';
@@ -15,6 +16,7 @@ import 'package:e_commerce_bloc/presentation/products/widgets/product_size_widge
 // import 'package:e_commerce_bloc/presentation/products/widgets/selection_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:iconsax/iconsax.dart';
 // import 'package:iconsax/iconsax.dart';
 
 class ProductDetailsPage extends StatelessWidget {
@@ -37,10 +39,26 @@ class ProductDetailsPage extends StatelessWidget {
         BlocProvider<ButtonCubit>(
           create: (BuildContext context) => ButtonCubit(),
         ),
+        BlocProvider<FavouriteIconCubit>(
+          create: (BuildContext context) =>
+              FavouriteIconCubit()..isFavourite(productEntity.productId),
+        ),
       ],
       child: Scaffold(
         bottomNavigationBar: AddToBagWidget(productEntity: productEntity),
-        appBar: BasicAppbar(),
+        appBar: BasicAppbar(
+          action: BlocBuilder<FavouriteIconCubit, bool>(
+            builder: (BuildContext context, state) {
+              return IconButton(
+                onPressed: () {
+                  context.read<FavouriteIconCubit>().onTap(productEntity);
+                },
+                icon: Icon(state ? Iconsax.lovely5 : Iconsax.lovely),
+              );
+              // return
+            },
+          ),
+        ),
         body: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(

@@ -8,6 +8,7 @@ import 'package:e_commerce_bloc/core/validation/input_validation.dart';
 import 'package:e_commerce_bloc/data/auth/models/user_creation_model.dart';
 import 'package:e_commerce_bloc/domain/auth/usecases/sign_in_use_case.dart';
 import 'package:e_commerce_bloc/presentation/auth/forget_password/screens/forget_password_page.dart';
+import 'package:e_commerce_bloc/presentation/home/pages/home_page.dart';
 import 'package:e_commerce_bloc/services_locator.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +47,7 @@ class EnterPasswordPage extends StatelessWidget {
                     behavior: SnackBarBehavior.floating,
                   ),
                 );
+                AppNavigator.push(context, HomePage());
               }
             },
             child: Column(
