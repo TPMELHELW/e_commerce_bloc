@@ -1,5 +1,4 @@
 import 'package:e_commerce_bloc/data/order/model/order_model.dart';
-import 'package:e_commerce_bloc/domain/order/entity/product_cart_entity.dart';
 import 'package:e_commerce_bloc/domain/order/usecases/add_order_use_case.dart';
 import 'package:e_commerce_bloc/domain/order/usecases/get_cart_products_use_case.dart';
 import 'package:e_commerce_bloc/domain/order/usecases/remove_product_use_case.dart';

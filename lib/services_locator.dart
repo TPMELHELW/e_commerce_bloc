@@ -10,6 +10,7 @@ import 'package:e_commerce_bloc/domain/auth/usecases/forget_password_use_case.da
 import 'package:e_commerce_bloc/domain/auth/usecases/get_user_info_use_case.dart';
 import 'package:e_commerce_bloc/domain/auth/usecases/is_sign_in_use_case.dart';
 import 'package:e_commerce_bloc/domain/auth/usecases/sign_in_use_case.dart';
+import 'package:e_commerce_bloc/domain/auth/usecases/sign_out_use_case.dart';
 import 'package:e_commerce_bloc/domain/auth/usecases/signup_use_case.dart';
 import 'package:e_commerce_bloc/domain/categories/repository/categories_repository.dart';
 import 'package:e_commerce_bloc/domain/categories/usecases/get_categories_use_case.dart';
@@ -17,6 +18,7 @@ import 'package:e_commerce_bloc/domain/order/repository/order_repository.dart';
 import 'package:e_commerce_bloc/domain/order/usecases/add_order_use_case.dart';
 import 'package:e_commerce_bloc/domain/order/usecases/add_to_cart_use_case.dart';
 import 'package:e_commerce_bloc/domain/order/usecases/get_cart_products_use_case.dart';
+import 'package:e_commerce_bloc/domain/order/usecases/get_orders_use_case.dart';
 import 'package:e_commerce_bloc/domain/order/usecases/remove_product_use_case.dart';
 import 'package:e_commerce_bloc/domain/product/repository/product_repository.dart';
 import 'package:e_commerce_bloc/domain/product/usecase/add_or_remove_favourite_product_use_case.dart';
@@ -59,4 +61,6 @@ Future<void> initServicesLocator() async {
     GetFavouriteProductUseCase(),
   );
   sl.registerSingleton<AddOrderUseCase>(AddOrderUseCase());
+  sl.registerSingleton<GetOrdersUseCase>(GetOrdersUseCase());
+  sl.registerSingleton<SignOutUseCase>(SignOutUseCase());
 }

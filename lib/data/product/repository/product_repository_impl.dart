@@ -90,7 +90,6 @@ class ProductRepositoryImpl extends ProductRepository {
       field: 'title',
       cond: query,
     );
-
     return data.fold(
       (error) {
         return Left(error);

@@ -5,19 +5,15 @@ import 'package:e_commerce_bloc/common/bloc/products_bloc/products_details_bloc/
 import 'package:e_commerce_bloc/common/bloc/products_bloc/products_details_bloc/select_size_cubit.dart';
 import 'package:e_commerce_bloc/common/widgets/basic_app_bar.dart';
 import 'package:e_commerce_bloc/core/configs/theme/app_colors.dart';
-// import 'package:e_commerce_bloc/core/constants/product_colors.dart';
-// import 'package:e_commerce_bloc/core/constants/product_sizes.dart';
 import 'package:e_commerce_bloc/domain/product/entity/product_entity.dart';
 import 'package:e_commerce_bloc/presentation/products/widgets/add_to_bag_widget.dart';
 import 'package:e_commerce_bloc/presentation/products/widgets/product_color_widget.dart';
 import 'package:e_commerce_bloc/presentation/products/widgets/product_images_widget.dart';
 import 'package:e_commerce_bloc/presentation/products/widgets/product_quantity_widget.dart';
 import 'package:e_commerce_bloc/presentation/products/widgets/product_size_widget.dart';
-// import 'package:e_commerce_bloc/presentation/products/widgets/selection_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
-// import 'package:iconsax/iconsax.dart';
 
 class ProductDetailsPage extends StatelessWidget {
   final ProductEntity productEntity;

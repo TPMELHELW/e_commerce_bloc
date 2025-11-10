@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:e_commerce_bloc/common/bloc/button_bloc/button_cubit.dart';
 import 'package:e_commerce_bloc/common/bloc/button_bloc/button_state.dart';
 import 'package:e_commerce_bloc/common/helper/app_navigator.dart';
@@ -5,6 +7,7 @@ import 'package:e_commerce_bloc/common/helper/cart_helper.dart';
 import 'package:e_commerce_bloc/common/widgets/reactive_button_widget.dart';
 import 'package:e_commerce_bloc/core/configs/theme/app_colors.dart';
 import 'package:e_commerce_bloc/data/order/model/order_model.dart';
+import 'package:e_commerce_bloc/data/order/model/product_cart_model.dart';
 import 'package:e_commerce_bloc/domain/order/entity/product_cart_entity.dart';
 import 'package:e_commerce_bloc/domain/order/usecases/add_order_use_case.dart';
 import 'package:e_commerce_bloc/presentation/cart/pages/success_page.dart';
@@ -91,11 +94,12 @@ class CheckoutDetailsWidget extends StatelessWidget {
                 context.read<ButtonCubit>().execute(
                   usecase: sl<AddOrderUseCase>(),
                   params: OrderModel(
-                    products: products,
+                    products: products.map((e) => e.toModel()).toList(),
                     createdDate: DateTime.now().toString(),
                     itemCount: products.length,
                     totalPrice: CartHelper.calculateCartSubtotal(products),
                     shippingAddress: 'Address',
+                    order: 10000 + Random().nextInt(90000),
                   ),
                 );
               },

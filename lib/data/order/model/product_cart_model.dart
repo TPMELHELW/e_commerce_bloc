@@ -56,6 +56,20 @@ class ProductCartModel {
       id: data.id,
     );
   }
+  factory ProductCartModel.fromMap(Map<String, dynamic> map) {
+    // final map = data.data();
+    return ProductCartModel(
+      productId: map['productId'],
+      productTitle: map['productTitle'],
+      productQuantity: map['productQuantity'],
+      productPrice: map['productPrice'],
+      totalPrice: map['totalPrice'],
+      productImage: map['productImage'],
+      productSize: map['productSize'],
+      productColor: map['productColor'],
+      // id: data.id,
+    );
+  }
 
   // final String createdDate;
 }
@@ -71,7 +85,7 @@ extension ProductCartXModel on ProductCartModel {
       productImage: productImage,
       productSize: productSize,
       productColor: productColor,
-      id: id!,
+      id: id ?? '',
     );
   }
 }

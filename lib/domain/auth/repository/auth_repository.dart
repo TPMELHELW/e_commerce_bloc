@@ -9,6 +9,7 @@ abstract class AuthRepository {
   Future<Either> forgetPassword(String email);
   Future<bool> isSignIn();
   Future<Either> getUserInfo();
+  Future<Either> signOut();
   // Future<Either<String, List<QueryDocumentSnapshot<Map<String, dynamic>>>>>
   // getAges();
 }

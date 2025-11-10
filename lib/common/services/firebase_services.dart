@@ -15,7 +15,7 @@ abstract class FirebaseServices {
 
 class FirebaseServicesImpl extends FirebaseServices {
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
-  final currentUser = FirebaseAuth.instance.currentUser!.uid;
+  final currentUser = FirebaseAuth.instance.currentUser;
 
   @override
   Future<Either> getData(String name, {String? field, dynamic cond}) async {
@@ -39,6 +39,7 @@ class FirebaseServicesImpl extends FirebaseServices {
           .collection(name)
           .where(field ?? '', isEqualTo: cond)
           .get();
+      print(data.docs.length);
 
       return Right(data.docs);
     } on FirebaseException catch (e) {
@@ -81,7 +82,7 @@ class FirebaseServicesImpl extends FirebaseServices {
     try {
       final QuerySnapshot<Map<String, dynamic>> data = await _fireStore
           .collection('Users')
-          .doc(currentUser)
+          .doc(currentUser!.uid)
           .collection('Favourites')
           .get();
       return Right(data.docs);

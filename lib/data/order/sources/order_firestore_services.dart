@@ -11,16 +11,20 @@ abstract class OrderFirestoreServices {
   getCartProduct();
   Future<Either<String, String>> removeFromCart(String productId);
   Future<Either<String, String>> addOrder(OrderModel product);
+  Future<Either<String, List<QueryDocumentSnapshot<Map<String, dynamic>>>>>
+  getOrders();
 }
 
 class OrderFirestoreServicesImpl extends OrderFirestoreServices {
-  final _firestore = FirebaseFirestore.instance
-      .collection('Users')
-      .doc(FirebaseAuth.instance.currentUser!.uid);
+  final _currentUser = FirebaseAuth.instance.currentUser;
+  final _firestore = FirebaseFirestore.instance.collection('Users');
   @override
   Future<Either<String, String>> addToCart(ProductCartModel product) async {
     try {
-      await _firestore.collection('Cart').add(product.toMap());
+      await _firestore
+          .doc(_currentUser!.uid)
+          .collection('Cart')
+          .add(product.toMap());
       return Right('Success');
     } catch (e) {
       return Left('Error');
@@ -31,7 +35,10 @@ class OrderFirestoreServicesImpl extends OrderFirestoreServices {
   Future<Either<String, List<QueryDocumentSnapshot<Map<String, dynamic>>>>>
   getCartProduct() async {
     try {
-      final data = await _firestore.collection('Cart').get();
+      final data = await _firestore
+          .doc(_currentUser!.uid)
+          .collection('Cart')
+          .get();
       return Right(data.docs);
     } catch (e) {
       return Left('Error');
@@ -41,7 +48,11 @@ class OrderFirestoreServicesImpl extends OrderFirestoreServices {
   @override
   Future<Either<String, String>> removeFromCart(String productId) async {
     try {
-      await _firestore.collection('Cart').doc(productId).delete();
+      await _firestore
+          .doc(_currentUser!.uid)
+          .collection('Cart')
+          .doc(productId)
+          .delete();
       return Right('Success');
     } on FirebaseException catch (e) {
       final message = FirebaseFirestoreErrorMappers.mapFirestoreError(e.code);
@@ -52,9 +63,27 @@ class OrderFirestoreServicesImpl extends OrderFirestoreServices {
   @override
   Future<Either<String, String>> addOrder(OrderModel product) async {
     try {
-      final data = await _firestore.collection('Orders').add(product.toMap());
+      final data = await _firestore
+          .doc(_currentUser!.uid)
+          .collection('Orders')
+          .add(product.toMap());
       print(data.id);
       return Right('Success');
+    } on FirebaseException catch (e) {
+      final message = FirebaseFirestoreErrorMappers.mapFirestoreError(e.code);
+      return Left(message);
+    }
+  }
+
+  @override
+  Future<Either<String, List<QueryDocumentSnapshot<Map<String, dynamic>>>>>
+  getOrders() async {
+    try {
+      final data = await _firestore
+          .doc(_currentUser!.uid)
+          .collection('Orders')
+          .get();
+      return Right(data.docs);
     } on FirebaseException catch (e) {
       final message = FirebaseFirestoreErrorMappers.mapFirestoreError(e.code);
       return Left(message);

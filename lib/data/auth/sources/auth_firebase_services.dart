@@ -12,6 +12,7 @@ abstract class AuthFirebaseServices {
   Future<Either> forgetPassword(String email);
   Future<bool> isSignIn();
   Future<Either> getUserInfo();
+  Future<Either> signOut();
 }
 
 class AuthFirebaseServicesImpl implements AuthFirebaseServices {
@@ -83,6 +84,16 @@ class AuthFirebaseServicesImpl implements AuthFirebaseServices {
     } catch (e) {
       print(e);
       return Left('Failed to get user info');
+    }
+  }
+
+  @override
+  Future<Either> signOut() async {
+    try {
+      await _auth.signOut();
+      return Right('Success Sign Out');
+    } catch (e) {
+      return Left(e.toString());
     }
   }
 }

@@ -24,7 +24,9 @@ class FavouritePage extends StatelessWidget {
               return Center(child: CircularProgressIndicator());
             }
             if (state is ProductsLoadedState) {
-              return ProductGridWidget(products: state.productsData);
+              return Column(
+                children: [ProductGridWidget(products: state.productsData)],
+              );
             }
             return Container();
           },
