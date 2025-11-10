@@ -5,13 +5,20 @@ This project demonstrates scalable architecture, testability, and maintainable c
 
 ---
 
-## 📸 Screenshots
+## 📷 Screenshots
 
-> Add your app screenshots in the `assets/screenshots/` folder and update the links below:
+| Home | Login | SignUp |
+|------|-------|--------|
+| ![Home](assets/screenshots/home.png) | ![Login](assets/screenshots/login.png) | ![SignUp](assets/screenshots/signup.png) |
 
-| Splash | Login  | Signup  | Categories | Products | Product Details | Settings | Cart |
-|:------:|:------:|:------:|:-----------:|:--------:|:---------------:|:--------:|:----:|
-| ![Splash](assets/screenshots/splash.png) | ![Login](assets/screenshots/login.png) ![Login](assets/screenshots/login1.png)| ![Login](assets/screenshots/signup.png)| ![Categories](assets/screenshots/categories.png) | ![Products](assets/screenshots/products.png) | ![Details](assets/screenshots/product_details.png) | ![Settings](assets/screenshots/settings.png) | ![Cart](assets/screenshots/cart.png) |
+| Categories | Products | Products Details |
+|------------|----------|------------------|
+| ![Categories](assets/screenshots/categories.png) | ![Products](assets/screenshots/products.png) | ![Products Details](assets/screenshots/product_details.png) |
+
+| Settings | Cart |
+|----------|------|
+| ![Settings](assets/screenshots/settings.png) | ![Login](assets/screenshots/cart.png) |
+
 
 ---
 
